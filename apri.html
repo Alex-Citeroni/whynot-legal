@@ -4,8 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Why not?</title>
+<!--
+  L'anteprima nelle chat. I crawler non vedono il frammento (#evento/…):
+  è la stessa per eventi, profili e post, e il titolo dell'evento sta già
+  nel testo del messaggio. L'immagine la genera scripts/og-image.py; le
+  chat la tengono in cache, quindi un'immagine nuova va pubblicata con un
+  nome nuovo.
+-->
+<meta name="description" content="Eventi, gente e posti vicino a te. Tocca il link per aprirlo nell'app.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Why not?">
+<meta property="og:locale" content="it_IT">
 <meta property="og:title" content="Why not?">
-<meta property="og:description" content="Ti hanno invitato a un evento: aprilo nell'app.">
+<meta property="og:description" content="Eventi, gente e posti vicino a te. Tocca il link per aprirlo nell'app.">
+<meta property="og:image" content="https://alex-citeroni.github.io/whynot-legal/og.jpg">
+<meta property="og:image:secure_url" content="https://alex-citeroni.github.io/whynot-legal/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="WHY NOT? col punto interrogativo al neon, gli occhi e la mappa della città">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why not?">
+<meta name="twitter:description" content="Eventi, gente e posti vicino a te. Tocca il link per aprirlo nell'app.">
+<meta name="twitter:image" content="https://alex-citeroni.github.io/whynot-legal/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 <!--
