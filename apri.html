@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why not?</title>
+<meta property="og:title" content="Why not?">
+<meta property="og:description" content="Ti hanno invitato a un evento: aprilo nell'app.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<!--
+  I link che l'app condivide (WhatsApp, Instagram…): un indirizzo https si
+  tocca, "whynot://" no. Questa pagina legge cosa aprire dal frammento
+  (apri.html#evento/<id>, #utente/<nome>) e passa all'app.
+-->
+<style>
+  :root { color-scheme: dark; --bg: #000; --fg: #fff; --muted: #c8c8d4; --magenta: #ff2bc4; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--fg);
+         font: 16px/1.5 -apple-system, system-ui, sans-serif; text-align: center; }
+  main { padding: 32px 16px; max-width: 420px; }
+  h1 { font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: 56px; letter-spacing: 1px; margin: 0 0 8px; }
+  h1 span { color: var(--magenta); text-shadow: 0 0 18px var(--magenta); }
+  p { color: var(--muted); margin: 8px 0 24px; }
+  a.button { display: inline-block; padding: 14px 28px; border-radius: 999px; color: #fff; text-decoration: none; font-weight: 700;
+             background: linear-gradient(135deg, #d6008f, #a312e8); }
+  small { display: block; margin-top: 20px; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>WHY NOT<span>?</span></h1>
+  <p id="text">Ti hanno invitato a un evento.</p>
+  <a class="button" id="open" href="whynot://">Apri in Why not?</a>
+  <small id="hint">Non si apre? L'app deve essere installata sul telefono.</small>
+</main>
+<script>
+  (function () {
+    var en = !/^it/i.test(navigator.language || '');
+    var path = decodeURIComponent((location.hash || '').slice(1));
+    // Solo le rotte che l'app condivide: niente altro passa all'app.
+    var ok = /^(evento\/[0-9a-f-]{36}|utente\/[A-Za-z0-9._-]{1,40}|post\/[0-9a-f-]{36})$/.test(path);
+    var kind = ok ? path.split('/')[0] : '';
+    var text = {
+      evento: en ? 'You’ve been invited to an event.' : 'Ti hanno invitato a un evento.',
+      utente: en ? 'Someone shared a profile with you.' : 'Ti hanno mandato un profilo.',
+      post: en ? 'Someone shared a post with you.' : 'Ti hanno mandato un post.',
+    }[kind] || (en ? 'Find out what’s on near you.' : 'Scopri cosa succede vicino a te.');
+    document.getElementById('text').textContent = text;
+    document.getElementById('hint').textContent = en
+      ? 'Nothing happens? The app needs to be installed on this phone.'
+      : 'Non si apre? L’app deve essere installata sul telefono.';
+    var link = 'whynot://' + (ok ? path : '');
+    var button = document.getElementById('open');
+    button.href = link;
+    button.textContent = en ? 'Open in Why not?' : 'Apri in Why not?';
+    if (ok) location.href = link;
+  })();
+</script>
+</body>
+</html>
